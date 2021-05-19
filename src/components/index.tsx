@@ -16,6 +16,7 @@ const initialState: State = {
     m: 10,
     p: 20,
     t: 30,
+    hasError: false,
   },
 };
 

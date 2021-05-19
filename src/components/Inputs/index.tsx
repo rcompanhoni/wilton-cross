@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import validator from 'validator';
 import { Input } from '../../lib/types';
 
 interface Props {
@@ -6,7 +7,18 @@ interface Props {
   setInput: (input: Input) => void;
 }
 
+interface Errors {
+  d?: string;
+  e?: string;
+  f?: string;
+  m?: string;
+  p?: string;
+  t?: string;
+}
+
 export const Inputs = ({ input, setInput }: Props) => {
+  const [errors, setErrors] = useState<Errors>({});
+
   const onInputChange = (evt: React.FormEvent<EventTarget>) => {
     const target = evt.target as HTMLInputElement;
     const field = target.name;
@@ -16,17 +28,30 @@ export const Inputs = ({ input, setInput }: Props) => {
     setInput({
       ...input,
       [field]: value,
+      hasError: validate(field, target.value),
     });
   };
 
-  const validate = (name: string, value: string) => {
-    if (['d', 'e', 'f'].includes(name)) {
-      return true; // TODO - mustn't be null && must be decimal
+  const validate = (field: string, value: string) => {
+    let validation = '';
+    if (field === 'd') {
+      validation = !validator.isFloat(value) ? 'Must be a float' : '';
     }
 
-    if (['m', 'p', 't'].includes(name)) {
-      return true; // TODO - mustn't be null && must be a number (integer or decimal)
+    if (['e', 'f'].includes(field)) {
+      validation = !validator.isFloat(value) ? 'Must be an integer' : '';
     }
+
+    if (['m', 'p', 't'].includes(field)) {
+      validation = !validator.isFloat(value) ? 'Must be a number' : '';
+    }
+
+    setErrors({
+      ...errors,
+      [field]: validation,
+    });
+
+    return !!validation;
   };
 
   return (
@@ -71,6 +96,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                     value={input?.d || ''}
                     onChange={onInputChange}
                   />
+                  <p className="help is-danger">{errors.d}</p>
                 </div>
               </div>
 
@@ -85,6 +111,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                     value={input?.e || ''}
                     onChange={onInputChange}
                   />
+                  <p className="help is-danger">{errors.e}</p>
                 </div>
               </div>
 
@@ -99,6 +126,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                     value={input?.f || ''}
                     onChange={onInputChange}
                   />
+                  <p className="help is-danger">{errors.f}</p>
                 </div>
               </div>
             </div>
@@ -117,6 +145,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                 value={input?.m || ''}
                 onChange={onInputChange}
               />
+              <p className="help is-danger">{errors.m}</p>
             </div>
           </div>
 
@@ -131,6 +160,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                 value={input?.p || ''}
                 onChange={onInputChange}
               />
+              <p className="help is-danger">{errors.p}</p>
             </div>
           </div>
 
@@ -145,6 +175,7 @@ export const Inputs = ({ input, setInput }: Props) => {
                 value={input?.t || ''}
                 onChange={onInputChange}
               />
+              <p className="help is-danger">{errors.t}</p>
             </div>
           </div>
         </form>

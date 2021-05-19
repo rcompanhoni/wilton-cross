@@ -8,6 +8,7 @@ export interface Input {
   m: number;
   p: number;
   t: number;
+  hasError: boolean;
 }
 
 export interface InputExpression {
