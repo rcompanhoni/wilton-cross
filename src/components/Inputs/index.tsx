@@ -23,7 +23,6 @@ export const Inputs = ({ input, setInput }: Props) => {
     const target = evt.target as HTMLInputElement;
     const field = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    console.log(`FIELD: ${field} -- VALUE: ${value}`);
 
     setInput({
       ...input,

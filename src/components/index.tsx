@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { Expressions } from './Expressions';
+import { baseExpressionSet, Expressions } from './Expressions';
 import { Inputs } from './Inputs';
 import { Result } from './Result';
-import { Input, State } from '../lib/types';
+import { ExpressionSet, Input, State } from '../lib/types';
 
 const initialState: State = {
   input: {
@@ -18,6 +18,7 @@ const initialState: State = {
     t: 30,
     hasError: false,
   },
+  expressionSet: baseExpressionSet,
 };
 
 function App() {
@@ -30,6 +31,13 @@ function App() {
     });
   };
 
+  const setExpressionSet = (expressionSet: ExpressionSet) => {
+    setState({
+      ...state,
+      expressionSet,
+    });
+  };
+
   return (
     <div className="container">
       <h1 className="title">Title</h1>
@@ -37,10 +45,13 @@ function App() {
 
       <div className="columns has-same-height">
         <div className="column">
-          <Inputs input={state.input} setInput={setInput} />
+          <Expressions
+            expressionSet={state.expressionSet}
+            setExpressionSet={setExpressionSet}
+          />
         </div>
         <div className="column">
-          <Expressions />
+          <Inputs input={state.input} setInput={setInput} />
         </div>
         <div className="column">
           <Result />

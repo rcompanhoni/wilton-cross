@@ -11,18 +11,10 @@ export interface Input {
   hasError: boolean;
 }
 
-export interface InputExpression {
-  a: boolean;
-  b: boolean;
-  c: boolean;
-  output: number;
-}
-
-export interface OutputExpression {
-  h: number;
-  d: number;
-  e: number;
-  f: number;
+export interface ExpressionSet {
+  name: string;
+  inputExpressionSet: string[];
+  outputExpressionSet: string[];
 }
 
 export interface Result {
@@ -31,7 +23,6 @@ export interface Result {
 
 export interface State {
   input: Input;
-  inputExpressions?: InputExpression[];
-  outputExpressions?: OutputExpression[];
+  expressionSet: ExpressionSet;
   result?: Result;
 }
