@@ -1,15 +1,24 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { Inputs, Expressions, Result } from './components';
 
 function App() {
   return (
-    <div>
-      <h1>ASSESSMENT</h1>
-      <p>Instructions</p>
-      <Inputs />
-      <Expressions />
-      <Result />
+    <div className="container">
+      <h1 className="title">Title</h1>
+      <h2 className="subtitle">Subtitle</h2>
+
+      <div className="columns has-same-height">
+        <div className="column">
+          <Inputs />
+        </div>
+        <div className="column">
+          <Expressions />
+        </div>
+        <div className="column">
+          <Result />
+        </div>
+      </div>
     </div>
   );
 }
