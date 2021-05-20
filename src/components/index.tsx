@@ -13,10 +13,7 @@ const initialState: State = {
     d: undefined,
     e: undefined,
     f: undefined,
-    m: 10,
-    p: 20,
-    t: 30,
-    hasError: false,
+    hasError: true,
   },
   expressionSet: baseExpressionSet,
 };

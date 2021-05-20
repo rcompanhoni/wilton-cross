@@ -12,6 +12,9 @@ export const Result = ({ input, expressionSet }: Props) => {
   const [matchingOutputExp, setMatchingOutputExp] = useState<string>('');
   const [k, setK] = useState<number>(-1);
 
+  const canEvaluate = !input.hasError && input.d && input.e && input.f;
+  const displayResults = canEvaluate && k !== -1;
+
   const evaluateExpression = () => {
     const h = expressionSet.inputExpressionSet.reduce(
       (expressionH: string, expression: string) => {
@@ -67,22 +70,30 @@ export const Result = ({ input, expressionSet }: Props) => {
       <div className="card-content">
         <h3 className="title is-4">Result</h3>
 
-        <button className="button is-primary" onClick={evaluateExpression}>
+        <button
+          className="button is-primary"
+          onClick={evaluateExpression}
+          disabled={!canEvaluate}
+        >
           Evaluate
         </button>
 
-        <div className="field is-horizontal">
-          <label className="label">K</label>
-          <div className="control">
-            <input className="input" type="text" value={k} readOnly />
-          </div>
-        </div>
+        {displayResults && (
+          <>
+            <div className="field is-horizontal">
+              <label className="label">K</label>
+              <div className="control">
+                <input className="input" type="text" value={k} readOnly />
+              </div>
+            </div>
 
-        <h3 className="title is-4">Matching Expressions</h3>
-        <ul>
-          <li>{matchingInputExp}</li>
-          <li>{matchingOutputExp}</li>
-        </ul>
+            <h3 className="title is-4">Matching Expressions</h3>
+            <ul>
+              <li>{matchingInputExp}</li>
+              <li>{matchingOutputExp}</li>
+            </ul>
+          </>
+        )}
       </div>
     </div>
   );

@@ -5,9 +5,6 @@ export interface Input {
   d?: number;
   e?: number;
   f?: number;
-  m: number;
-  p: number;
-  t: number;
   hasError: boolean;
 }
 

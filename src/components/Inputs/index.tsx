@@ -11,9 +11,6 @@ interface Errors {
   d?: string;
   e?: string;
   f?: string;
-  m?: string;
-  p?: string;
-  t?: string;
 }
 
 export const Inputs = ({ input, setInput }: Props) => {
@@ -39,10 +36,6 @@ export const Inputs = ({ input, setInput }: Props) => {
 
     if (['e', 'f'].includes(field)) {
       validation = !validator.isFloat(value) ? 'Must be an integer' : '';
-    }
-
-    if (['m', 'p', 't'].includes(field)) {
-      validation = !validator.isFloat(value) ? 'Must be a number' : '';
     }
 
     setErrors({
@@ -128,53 +121,6 @@ export const Inputs = ({ input, setInput }: Props) => {
                   <p className="help is-danger">{errors.f}</p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <h2 className="title is-4">H Values</h2>
-
-          <div className="field is-horizontal">
-            <label className="label">M</label>
-            <div className="control">
-              <input
-                name="m"
-                className="input"
-                type="text"
-                placeholder="Type an integer"
-                value={input?.m || ''}
-                onChange={onInputChange}
-              />
-              <p className="help is-danger">{errors.m}</p>
-            </div>
-          </div>
-
-          <div className="field is-horizontal">
-            <label className="label">P</label>
-            <div className="control">
-              <input
-                name="p"
-                className="input"
-                type="text"
-                placeholder="Type an integer"
-                value={input?.p || ''}
-                onChange={onInputChange}
-              />
-              <p className="help is-danger">{errors.p}</p>
-            </div>
-          </div>
-
-          <div className="field is-horizontal">
-            <label className="label">T</label>
-            <div className="control">
-              <input
-                name="t"
-                className="input"
-                type="text"
-                placeholder="Type an integer"
-                value={input?.t || ''}
-                onChange={onInputChange}
-              />
-              <p className="help is-danger">{errors.t}</p>
             </div>
           </div>
         </form>
