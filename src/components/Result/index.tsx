@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Parser } from 'expr-eval';
 import { Input, ExpressionSet } from '../../lib/types';
 
 interface Props {
@@ -7,6 +8,10 @@ interface Props {
 }
 
 export const Result = ({ input, expressionSet }: Props) => {
+  const [matchingInputExp, setMatchingInputExp] = useState<string>('');
+  const [matchingOutputExp, setMatchingOutputExp] = useState<string>('');
+  const [k, setK] = useState<number>(-1);
+
   const evaluateExpression = () => {
     const h = expressionSet.inputExpressionSet.reduce(
       (expressionH: string, expression: string) => {
@@ -25,6 +30,7 @@ export const Result = ({ input, expressionSet }: Props) => {
 
         // return the proper h value
         if (match) {
+          setMatchingInputExp(expression);
           const output = expressionVars[expressionVars.length - 1]
             .toLowerCase()
             .trim();
@@ -36,16 +42,47 @@ export const Result = ({ input, expressionSet }: Props) => {
       ''
     );
 
-    console.log(`H VALUE IS ${h}`);
+    if (h) {
+      // gets matching expression for current 'h'
+      const kExpression = expressionSet.outputExpressionSet.find((oexp) =>
+        oexp.includes(h.toUpperCase())
+      );
+      setMatchingOutputExp(kExpression || '');
+
+      // evaluate result using user input
+      const kExpressionRight = kExpression?.split('K = ')[1];
+      const k = Parser.evaluate(kExpressionRight || '', {
+        D: input.d || 0,
+        E: input.e || 0,
+        F: input.f || 0,
+      });
+
+      console.log(`RESULT: ${k}`);
+      setK(k);
+    }
   };
 
   return (
     <div className="card">
       <div className="card-content">
         <h3 className="title is-4">Result</h3>
+
         <button className="button is-primary" onClick={evaluateExpression}>
           Evaluate
         </button>
+
+        <div className="field is-horizontal">
+          <label className="label">K</label>
+          <div className="control">
+            <input className="input" type="text" value={k} readOnly />
+          </div>
+        </div>
+
+        <h3 className="title is-4">Matching Expressions</h3>
+        <ul>
+          <li>{matchingInputExp}</li>
+          <li>{matchingOutputExp}</li>
+        </ul>
       </div>
     </div>
   );
