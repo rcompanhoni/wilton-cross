@@ -14,12 +14,7 @@ export interface ExpressionSet {
   outputExpressionSet: string[];
 }
 
-export interface Result {
-  k: number;
-}
-
 export interface State {
   input: Input;
   expressionSet: ExpressionSet;
-  result?: Result;
 }
