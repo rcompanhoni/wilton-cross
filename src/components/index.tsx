@@ -54,7 +54,7 @@ function App() {
           <Inputs input={state.input} setInput={setInput} />
         </div>
         <div className="column">
-          <Result />
+          <Result input={state.input} expressionSet={state.expressionSet} />
         </div>
       </div>
     </div>
