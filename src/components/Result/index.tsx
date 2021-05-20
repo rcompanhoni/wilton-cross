@@ -11,6 +11,7 @@ export const Result = ({ input, expressionSet }: Props) => {
   const [matchingInputExp, setMatchingInputExp] = useState<string>('');
   const [matchingOutputExp, setMatchingOutputExp] = useState<string>('');
   const [k, setK] = useState<number>(-1);
+  const [hasMatch, setHasMatch] = useState<boolean>(true);
 
   const canEvaluate = !input.hasError && input.d && input.e && input.f;
   const displayResults = canEvaluate && k !== -1;
@@ -60,8 +61,10 @@ export const Result = ({ input, expressionSet }: Props) => {
         F: input.f || 0,
       });
 
-      console.log(`RESULT: ${k}`);
+      setHasMatch(true);
       setK(k);
+    } else {
+      setHasMatch(false);
     }
   };
 
@@ -80,18 +83,28 @@ export const Result = ({ input, expressionSet }: Props) => {
 
         {displayResults && (
           <>
-            <div className="field is-horizontal">
-              <label className="label">K</label>
-              <div className="control">
-                <input className="input" type="text" value={k} readOnly />
+            {!hasMatch && (
+              <div className="notification is-danger">
+                Error: no matching expressions for the selected set.
               </div>
-            </div>
+            )}
 
-            <h3 className="title is-4">Matching Expressions</h3>
-            <ul>
-              <li>{matchingInputExp}</li>
-              <li>{matchingOutputExp}</li>
-            </ul>
+            {hasMatch && (
+              <>
+                <div className="field is-horizontal">
+                  <label className="label">K</label>
+                  <div className="control">
+                    <input className="input" type="text" value={k} readOnly />
+                  </div>
+                </div>
+
+                <h3 className="title is-4">Matching Expressions</h3>
+                <ul>
+                  <li>{matchingInputExp}</li>
+                  <li>{matchingOutputExp}</li>
+                </ul>
+              </>
+            )}
           </>
         )}
       </div>
