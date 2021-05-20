@@ -1,1 +1,21 @@
+.instructions {
+  margin: 25px;
+  margin-bottom: -5px;
 
+  .subtitle {
+    position: relative;
+    top: 5px;
+  }
+
+  ol {
+    position: relative;
+    left: 25px;
+    bottom: 10px;
+  }
+}
+
+.card {
+  margin: 15px;
+  height: 100%;
+  min-height: 400px;
+}

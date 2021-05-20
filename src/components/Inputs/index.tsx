@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 import { Input } from '../../lib/types';
+import './index.scss';
 
 interface Props {
   input: Input;
@@ -51,75 +52,81 @@ export const Inputs = ({ input, setInput }: Props) => {
       <div className="card-content">
         <h2 className="title is-4">Inputs</h2>
         <form>
-          <div className="field">
-            <div className="control">
-              <label className="checkbox">
-                <input
-                  name="a"
-                  type="checkbox"
-                  checked={input?.a}
-                  onChange={onInputChange}
-                />
-                A
-                <input
-                  name="b"
-                  type="checkbox"
-                  checked={input?.b}
-                  onChange={onInputChange}
-                />
-                B
-                <input
-                  name="c"
-                  type="checkbox"
-                  checked={input?.c}
-                  onChange={onInputChange}
-                />
-                C
-              </label>
+          <div className="checkbox boolean-inputs">
+            <span>
+              <input
+                name="a"
+                type="checkbox"
+                checked={input?.a}
+                onChange={onInputChange}
+              />
+              A
+            </span>
 
-              <div className="field is-horizontal">
-                <label className="label">D</label>
-                <div className="control">
-                  <input
-                    name="d"
-                    className="input"
-                    type="text"
-                    placeholder="Type a float value"
-                    value={input?.d || ''}
-                    onChange={onInputChange}
-                  />
-                  <p className="help is-danger">{errors.d}</p>
-                </div>
+            <span>
+              <input
+                name="b"
+                type="checkbox"
+                checked={input?.b}
+                onChange={onInputChange}
+              />
+              B
+            </span>
+
+            <span>
+              <input
+                name="c"
+                type="checkbox"
+                checked={input?.c}
+                onChange={onInputChange}
+              />
+              C
+            </span>
+          </div>
+
+          <div className="numeral-inputs">
+            <div className="field is-horizontal">
+              <label className="label">D</label>
+              <div className="control">
+                <input
+                  name="d"
+                  className="input"
+                  type="text"
+                  placeholder="Type a float value"
+                  value={input?.d || ''}
+                  onChange={onInputChange}
+                />
+                <p className="help is-danger">{errors.d}</p>
               </div>
+            </div>
 
-              <div className="field is-horizontal">
-                <label className="label">E</label>
-                <div className="control">
-                  <input
-                    name="e"
-                    className="input"
-                    type="text"
-                    placeholder="Type an integer"
-                    value={input?.e || ''}
-                    onChange={onInputChange}
-                  />
-                  <p className="help is-danger">{errors.e}</p>
-                </div>
+            <div className="field is-horizontal">
+              <label className="label">E</label>
+              <div className="control">
+                <input
+                  name="e"
+                  className="input"
+                  type="text"
+                  placeholder="Type an integer"
+                  value={input?.e || ''}
+                  onChange={onInputChange}
+                />
+                <p className="help is-danger">{errors.e}</p>
               </div>
+            </div>
 
-              <div className="field is-horizontal">
-                <label className="label">F</label>
-                <div className="control">
-                  <input
-                    name="f"
-                    className="input"
-                    type="text"
-                    placeholder="Type an integer"
-                    value={input?.f || ''}
-                    onChange={onInputChange}
-                  />
-                  <p className="help is-danger">{errors.f}</p>
-                </div>
+            <div className="field is-horizontal">
+              <label className="label">F</label>
+              <div className="control">
+                <input
+                  name="f"
+                  className="input"
+                  type="text"
+                  placeholder="Type an integer"
+                  value={input?.f || ''}
+                  onChange={onInputChange}
+                />
+                <p className="help is-danger">{errors.f}</p>
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './index.scss';
 import { baseExpressionSet, Expressions } from './Expressions';
 import { Inputs } from './Inputs';
 import { Result } from './Result';
 import { ExpressionSet, Input, State } from '../lib/types';
+import './index.scss';
 
 const initialState: State = {
   input: {
@@ -37,8 +37,25 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="title">Title</h1>
-      <h2 className="subtitle">Subtitle</h2>
+      <div className="instructions">
+        <h1 className="title">
+          Front End Engineer Assessment - Rafael Companhoni
+        </h1>
+        <h2 className="subtitle">Instructions:</h2>
+        <ol>
+          <li>
+            At the <strong>Expressions</strong> card, select the set of
+            expressions to be considered.
+          </li>
+          <li>
+            At the <strong>Inputs</strong> card, provide all the input values.
+          </li>
+          <li>
+            Verify the results by clicking on the 'Evaluate' button at the{' '}
+            <strong>Result</strong> card.
+          </li>
+        </ol>
+      </div>
 
       <div className="columns has-same-height">
         <div className="column">

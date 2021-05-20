@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Parser } from 'expr-eval';
 import { Input, ExpressionSet } from '../../lib/types';
+import './index.scss';
 
 interface Props {
   input: Input;
@@ -73,24 +74,28 @@ export const Result = ({ input, expressionSet }: Props) => {
       <div className="card-content">
         <h3 className="title is-4">Result</h3>
 
-        <button
-          className="button is-primary"
-          onClick={evaluateExpression}
-          disabled={!canEvaluate}
-        >
-          Evaluate
-        </button>
+        <div className="button-container">
+          <button
+            className="button is-primary"
+            onClick={evaluateExpression}
+            disabled={!canEvaluate}
+          >
+            Evaluate
+          </button>
+        </div>
 
         {displayResults && (
           <>
             {!hasMatch && (
-              <div className="notification is-danger">
-                Error: no matching expressions for the selected set.
+              <div className="error-container">
+                <div className="notification is-danger">
+                  Error: no matching expression for the selected set.
+                </div>
               </div>
             )}
 
             {hasMatch && (
-              <>
+              <div className="result-container">
                 <div className="field is-horizontal">
                   <label className="label">K</label>
                   <div className="control">
@@ -99,11 +104,16 @@ export const Result = ({ input, expressionSet }: Props) => {
                 </div>
 
                 <h3 className="title is-4">Matching Expressions</h3>
-                <ul>
-                  <li>{matchingInputExp}</li>
-                  <li>{matchingOutputExp}</li>
-                </ul>
-              </>
+
+                <div className="message is-success">
+                  <div className="message-body">
+                    <ul>
+                      <li>{matchingInputExp}</li>
+                      <li>{matchingOutputExp}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             )}
           </>
         )}

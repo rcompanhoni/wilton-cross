@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ExpressionSet } from '../../lib/types';
+import './index.scss';
 
 interface Props {
   expressionSet: ExpressionSet;
@@ -63,32 +64,40 @@ export const Expressions = ({ expressionSet, setExpressionSet }: Props) => {
     <div className="card">
       <div className="card-content">
         <h3 className="title is-4">Expressions</h3>
-        <div className="field">
-          <label className="label">Please, select a set of expressions</label>
-          <div className="control">
-            <div className="select">
-              <select value={expressionSet.name} onChange={onSetChange}>
-                <option value="base">Base</option>
-                <option value="custom1">Custom 1</option>
-                <option value="custom2">Custom 2</option>
-              </select>
+
+        <label className="label">Please, select a set of expressions</label>
+        <div className="select">
+          <select value={expressionSet.name} onChange={onSetChange}>
+            <option value="base">Base</option>
+            <option value="custom1">Custom 1</option>
+            <option value="custom2">Custom 2</option>
+          </select>
+        </div>
+
+        <div className="expression-container">
+          <div className="message is-primary">
+            <div className="message-body">
+              <ul>
+                {expressionMap
+                  .get(selectedSetName)
+                  ?.inputExpressionSet.map((expression: string) => (
+                    <li key={expression}>{expression}</li>
+                  ))}
+                <li>{`[other] => [error]`}</li>
+              </ul>
             </div>
-            <ul>
-              {expressionMap
-                .get(selectedSetName)
-                ?.inputExpressionSet.map((expression: string) => (
-                  <li key={expression}>{expression}</li>
-                ))}
-              <li>{`[other] => [error]`}</li>
-            </ul>
-            <br />
-            <ul>
-              {expressionMap
-                .get(selectedSetName)
-                ?.outputExpressionSet.map((expression: string) => (
-                  <li key={expression}>{expression}</li>
-                ))}
-            </ul>
+          </div>
+
+          <div className="message is-info">
+            <div className="message-body">
+              <ul>
+                {expressionMap
+                  .get(selectedSetName)
+                  ?.outputExpressionSet.map((expression: string) => (
+                    <li key={expression}>{expression}</li>
+                  ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

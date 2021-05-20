@@ -1,0 +1,19 @@
+.boolean-inputs {
+  display: flex;
+  justify-content: space-evenly;
+
+  input[type='checkbox'] {
+    transform: scale(2);
+    position: relative;
+    right: 10px;
+  }
+}
+
+.numeral-inputs {
+  position: relative;
+  top: 35px;
+
+  label {
+    margin-right: 10px;
+  }
+}

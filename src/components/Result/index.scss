@@ -1,0 +1,41 @@
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    padding: 30px;
+    font-size: 22px;
+    margin-top: 10px;
+  }
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  height: 235px;
+}
+
+.result-container {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    margin-top: 15px;
+  }
+
+  label {
+    margin-right: 5px;
+    position: relative;
+    top: 5px;
+  }
+
+  ul {
+    font-size: 14px;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
+}
