@@ -18,7 +18,7 @@ const initialState: State = {
   expressionSet: baseExpressionSet,
 };
 
-function App() {
+export const App = () => {
   const [state, setState] = useState<State>(initialState);
 
   const setInput = (input: Input) => {
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="instructions">
+      <div data-testid="instructions" className="instructions">
         <h1 className="title">
           Front End Engineer Assessment - Rafael Companhoni
         </h1>
@@ -58,21 +58,19 @@ function App() {
       </div>
 
       <div className="columns has-same-height">
-        <div className="column">
+        <div data-testid="expressions" className="column">
           <Expressions
             expressionSet={state.expressionSet}
             setExpressionSet={setExpressionSet}
           />
         </div>
-        <div className="column">
+        <div data-testid="inputs" className="column">
           <Inputs input={state.input} setInput={setInput} />
         </div>
-        <div className="column">
+        <div data-testid="result" className="column">
           <Result input={state.input} expressionSet={state.expressionSet} />
         </div>
       </div>
     </div>
   );
-}
-
-export default App;
+};

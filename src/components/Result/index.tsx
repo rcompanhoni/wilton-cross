@@ -13,9 +13,10 @@ export const Result = ({ input, expressionSet }: Props) => {
   const [matchingOutputExp, setMatchingOutputExp] = useState<string>('');
   const [k, setK] = useState<number>(-1);
   const [hasMatch, setHasMatch] = useState<boolean>(true);
+  const [hasAttempted, setHasAttempted] = useState<boolean>(false);
 
   const canEvaluate = !input.hasError && input.d && input.e && input.f;
-  const displayResults = canEvaluate && k !== -1;
+  const displayResults = canEvaluate && hasAttempted;
 
   const evaluateExpression = () => {
     const h = expressionSet.inputExpressionSet.reduce(
@@ -67,6 +68,8 @@ export const Result = ({ input, expressionSet }: Props) => {
     } else {
       setHasMatch(false);
     }
+
+    setHasAttempted(true);
   };
 
   return (
@@ -87,9 +90,9 @@ export const Result = ({ input, expressionSet }: Props) => {
         {displayResults && (
           <>
             {!hasMatch && (
-              <div className="error-container">
+              <div data-testid="error" className="error-container">
                 <div className="notification is-danger">
-                  Error: no matching expression for the selected set.
+                  Error: no matching expression for the provided input values.
                 </div>
               </div>
             )}
@@ -99,7 +102,13 @@ export const Result = ({ input, expressionSet }: Props) => {
                 <div className="field is-horizontal">
                   <label className="label">K</label>
                   <div className="control">
-                    <input className="input" type="text" value={k} readOnly />
+                    <input
+                      data-testid="result"
+                      className="input"
+                      type="text"
+                      value={k}
+                      readOnly
+                    />
                   </div>
                 </div>
 

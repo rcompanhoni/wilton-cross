@@ -67,15 +67,25 @@ export const Expressions = ({ expressionSet, setExpressionSet }: Props) => {
 
         <label className="label">Please, select a set of expressions</label>
         <div className="select">
-          <select value={expressionSet.name} onChange={onSetChange}>
-            <option value="base">Base</option>
-            <option value="custom1">Custom 1</option>
-            <option value="custom2">Custom 2</option>
+          <select
+            data-testid="select"
+            value={expressionSet.name}
+            onChange={onSetChange}
+          >
+            <option data-testid="set-option" value="base">
+              Base
+            </option>
+            <option data-testid="set-option" value="custom1">
+              Custom 1
+            </option>
+            <option data-testid="set-option" value="custom2">
+              Custom 2
+            </option>
           </select>
         </div>
 
         <div className="expression-container">
-          <div className="message is-primary">
+          <div data-testid="input-expressions" className="message is-primary">
             <div className="message-body">
               <ul>
                 {expressionMap
@@ -88,7 +98,7 @@ export const Expressions = ({ expressionSet, setExpressionSet }: Props) => {
             </div>
           </div>
 
-          <div className="message is-info">
+          <div data-testid="output-expressions" className="message is-info">
             <div className="message-body">
               <ul>
                 {expressionMap
